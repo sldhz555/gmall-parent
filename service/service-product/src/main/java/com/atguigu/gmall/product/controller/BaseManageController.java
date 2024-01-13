@@ -1,16 +1,20 @@
 package com.atguigu.gmall.product.controller;
 
 import com.atguigu.gmall.common.result.Result;
-import com.atguigu.gmall.model.product.BaseAttrInfo;
-import com.atguigu.gmall.model.product.BaseAttrValue;
-import com.atguigu.gmall.model.product.BaseCategory1;
-import com.atguigu.gmall.model.product.BaseCategory2;
+import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.mapper.BaseAttrValueMapper;
 import com.atguigu.gmall.product.service.ManageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.io.FilenameUtils;
+import org.csource.fastdfs.ClientGlobal;
+import org.csource.fastdfs.StorageClient1;
+import org.csource.fastdfs.TrackerClient;
+import org.csource.fastdfs.TrackerServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,6 +24,8 @@ import java.util.List;
 public class BaseManageController {
     @Autowired
     private ManageService manageService;
+
+
 
 
     @GetMapping("getCategory1")
@@ -41,7 +47,7 @@ public class BaseManageController {
     @GetMapping("getCategory3/{category2Id}")
     @ApiOperation("获取三级分类")
     public Result getCategory3(@PathVariable Long category2Id){
-        List<BaseCategory2> category3= manageService.getCategory2(category2Id);
+        List<BaseCategory3> category3= manageService.getCategory3(category2Id);
         return Result.ok(category3);
     }
 
